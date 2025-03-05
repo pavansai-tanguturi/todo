@@ -1,4 +1,4 @@
-![Uploading todo-app-demo.png…]()
+![todo-app-demo.png]()
 
 
 Below is the updated documentation with an explanation of how data is stored in the Node.js server without a database, highlighted as requested. I'll also include the updated README and GitHub publishing steps again for completeness.
