@@ -121,6 +121,28 @@ app.delete('/todos/:id', async (req, res) => {
   }
 });
 
+app.patch('/todos/:id', async (req, res) => {
+  try {
+    const todos = await loadTodos();
+    const id = parseInt(req.params.id);
+    const index = todos.findIndex(t => t.id === id);
+    
+    if (index === -1) return res.status(404).json({ message: 'Todo not found' });
+    
+    // Only update the fields that are provided in the request body
+    todos[index] = {
+      ...todos[index],
+      ...(req.body.title !== undefined && { title: req.body.title }),
+      ...(req.body.completed !== undefined && { completed: req.body.completed }),
+      ...(req.body.userId !== undefined && { userId: req.body.userId })
+    };
+    await saveTodos(todos);
+    res.json(todos[index]);
+  } catch (error) {
+    res.status(500).json({ message: 'Error patching todo' });
+  }
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
