@@ -1,4 +1,4 @@
-[<video width="1792" alt="Image" src="https://github.com/user-attachments/assets/44c92ff2-823a-43fb-8874-41d00d20c38e" />](https://github.com/user-attachments/assets/d79fabe9-57d3-4af6-97ef-52655d06bf08)
+
 
 Below is the updated documentation with an explanation of how data is stored in the Node.js server without a database, highlighted as requested. I'll also include the updated README and GitHub publishing steps again for completeness.
 
