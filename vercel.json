@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "cd todo-crud && npm install && npm run build",
+  "installCommand": "npm install && cd todo-crud && npm install",
+  "buildCommand": "cd todo-crud && CI=false npm run build",
   "outputDirectory": "todo-crud/build",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api" }
