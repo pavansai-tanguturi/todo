@@ -1,242 +1,148 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+/* ==========================
+   Redesigned — Modern Dark Theme
+   - accessible contrast
+   - compact cards with subtle motion
+   - improved form & controls
+   ========================== */
 
-/* Reset default styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Farro", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root{
+  --bg: #071029; /* page background */
+  --card: rgba(255,255,255,0.02);
+  --text: #e6eef8;
+  --muted: #94a3b8;
+  --accent: #4fd1c5; /* teal */
+  --accent-2: #60a5fa; /* blue */
+  --danger: #ff6b6b;
+  --glass-border: rgba(255,255,255,0.06);
+  --radius: 14px;
+  --shadow: 0 8px 30px rgba(2,6,23,0.6);
+  --transition: 200ms cubic-bezier(.2,.9,.2,1);
 }
 
-/* App Container */
-.App {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); /* Purple to blue gradient */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: radial-gradient(ellipse at top left, rgba(79,209,197,0.06) 0%, transparent 30%), linear-gradient(180deg,#061028 0%,#0b1320 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-/* Main Container */
-.container {
-  background: rgba(255, 255, 255, 0.35); /* Transparent background */
-  border-radius: 10px;
-  padding: 20px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
-  border: 1px solid rgba(224, 224, 224, 0.5); /* Lighter border for transparency */
-  position: relative; /* For overlay positioning */
-  overflow: hidden; /* Ensure gloss effect stays within borders */
-  
-  /* Glossy effect with gradient overlay */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(240, 240, 240, 0.4) 50%, rgba(255, 255, 255, 0.4) 100%);
+.App{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+
+.container{
+  width:100%;max-width:720px;padding:28px;border-radius:var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid var(--glass-border);box-shadow:var(--shadow);backdrop-filter:blur(6px) saturate(120%);
+  transition:background 320ms var(--transition), border-color 320ms var(--transition), box-shadow 320ms var(--transition);
 }
 
-.container:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
-  border-radius: 10px 10px 0 0;
-  z-index: 1;
-}
+/* alternate theme */
+.container.theme-sunset{
+  --accent: #ff8a65; /* warm coral */
+  --accent-2: #ff6bcb; /* pink */
+  background: linear-gradient(180deg, rgba(255,138,101,0.04), rgba(11,6,24,0.92));
+  border-color: rgba(255,255,255,0.04);
+  box-shadow: 0 10px 36px rgba(24,6,50,0.6);
+} 
 
-/* Header */
-h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: 600;
-  position: relative; /* Ensure text stays above gloss */
-  z-index: 2;
-}
+h1{margin:0 0 18px;font-weight:700;font-size:28px;text-align:center;letter-spacing:0.2px;color:var(--text)}
 
-/* Todo Form */
-.todo-form {
-  display: flex;
-  flex-direction: column; /* Changed to column to stack input above button */
-  gap: 10px; /* Space between input and button */
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 2;
+/* --- Form --- */
+.todo-form{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+.todo-form input[type="text"],
+.edit-input{
+  flex:1;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.03);color:var(--text);font-size:15px;outline:none;
+  transition:box-shadow var(--transition),transform var(--transition);
 }
+.todo-form input::placeholder,.edit-input::placeholder{color:var(--muted)}
+.todo-form input:focus,.edit-input:focus{box-shadow:0 6px 18px rgba(3,7,18,0.45),0 0 0 4px rgba(79,209,197,0.08);transform:translateY(-1px)}
 
-.todo-form input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  outline: none;
-  font-family: open-sans, sans-serif;
-  color: #333;
-}
+.add-button{background:linear-gradient(180deg,var(--accent),#2bb6a9);border:none;color:#042024;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(79,209,197,0.12);transition:transform var(--transition),box-shadow var(--transition),opacity var(--transition);display:inline-flex;gap:8px;align-items:center;position:relative;overflow:hidden}
+.add-button .btn-icon{width:14px;height:14px;display:inline-block;transform:translateY(-1px)}
+.add-button:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(79,209,197,0.18);opacity:0.98}
+.add-button:active{transform:translateY(-1px)}
+.add-button:focus-visible{outline:3px solid rgba(79,209,197,0.12);outline-offset:3px}
+.add-button::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 10% 0%, rgba(255,255,255,0.06), transparent 25%);opacity:0;transition:opacity 300ms}
+.add-button:active::after{opacity:1}
 
-.todo-form input::placeholder {
-  color: #999;
-}
+/* small utility / control buttons */
+.btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:999px;color:var(--muted);cursor:pointer;transition:transform var(--transition),color var(--transition),background var(--transition),box-shadow var(--transition);display:inline-flex;gap:8px;align-items:center;font-weight:600}
+.btn:hover{transform:translateY(-3px);color:var(--text);box-shadow:0 8px 24px rgba(2,6,23,0.4)}
+.btn.active{background:linear-gradient(90deg, rgba(79,209,197,0.06), rgba(96,165,250,0.04));color:var(--accent-2);border-color:rgba(255,255,255,0.06)}
+.btn.ghost{background:transparent;border-color:rgba(255,255,255,0.03)}
+.btn.danger{color:var(--danger);border-color:rgba(255,255,255,0.03)}
+.icon-sm{width:14px;height:14px;opacity:0.9}
 
-.todo-form button {
-  padding: 10px 20px;
-  background-color: #55baba; /* Green button */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-  position: relative;
-  z-index: 2;
-}
+/* controls row */
+.controls{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}
+.filters{display:flex;gap:8px;align-items:center}
+.actions-right{display:flex;gap:8px;align-items:center}
 
-.todo-form button:hover {
-  background-color: #3a8383cf; /* Darker green for hover */
-}
+/* item entrance handled by Framer Motion — keep optional new-item bounce */
+@keyframes newBounce{0%{transform:translateY(-6px) scale(0.995);box-shadow:0 8px 30px rgba(2,6,23,0.45)}50%{transform:translateY(0) scale(1.02);box-shadow:0 18px 40px rgba(79,209,197,0.12)}100%{transform:translateY(0) scale(1)}}
+.todo-item.new-item{animation:newBounce 720ms cubic-bezier(.2,.9,.2,1)}
 
-/* Todo List */
-.todo-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-  z-index: 2;
-}
+/* Framer Motion controls entrance/exit animations now (remove CSS pop-in / stagger) */
 
-.todo-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 4px;
-  border: 1px solid #e0e0e0;
-  position: relative;
-  z-index: 2;
-}
+/* icon micro-interactions */
+.icon{transition:transform 180ms ease,color 180ms ease}
+.icon:active{transform:scale(0.94)}
+.save-icon{color:#7ee6d4}
+.cancel-icon{color:#ff9b9b}
 
-.todo-item input[type="checkbox"] {
-  margin-right: 10px;
-}
+/* --- List & Items --- */
+.todo-list{display:flex;flex-direction:column;gap:12px}
+.todo-item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03);transition:transform var(--transition),background-color var(--transition),box-shadow var(--transition);position:relative}
+.todo-item:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(2,6,23,0.45)}
 
-.todo-item span {
-  flex: 1;
-  font-size: 16px;
-  color: #333;
-}
+/* custom checkbox */
+.todo-item input[type="checkbox"]{appearance:none;width:18px;height:18px;border-radius:6px;border:2px solid rgba(255,255,255,0.08);background:transparent;display:inline-grid;place-items:center;cursor:pointer;transition:background var(--transition),border-color var(--transition),transform var(--transition)}
+.todo-item input[type="checkbox"]:checked{background:linear-gradient(180deg,var(--accent),#21a79d);border-color:transparent;transform:scale(1.02);box-shadow:0 6px 14px rgba(15,46,50,0.25),inset 0 -4px 6px rgba(0,0,0,0.2)}
+.todo-item input[type="checkbox"]::after{content:'';width:8px;height:8px;border-radius:2px;transform:rotate(45deg) scale(0);box-shadow:2px 2px 0 white;transition:transform var(--transition) cubic-bezier(.2,.9,.3,1)}
+.todo-item input[type="checkbox"]:checked::after{transform:rotate(45deg) scale(1)}
 
-.todo-item .delete-icon {
-  color: gray;
-  cursor: pointer;
-  font-size: 16px;
-  transition: color 0.3s;
-}
+.todo-item span{flex:1;color:var(--text);font-size:15px;word-break:break-word}
+.completed{opacity:0.55;text-decoration:line-through;color:#9fb1c7}
 
-.todo-item .delete-icon:hover {
-  color: #2d2f31;
-}
+.actions{display:flex;gap:12px;align-items:center}
+.icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;color:var(--muted);cursor:pointer;transition:color var(--transition),transform var(--transition)}
+.icon:hover{color:var(--accent-2);transform:translateY(-2px)}
+.delete-icon:hover{color:var(--danger);transform:translateY(-2px)}
+.edit-icon{color:#8fd7f9}
 
-/* Edit Container */
-.edit-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-}
+/* Edit */
+.edit-container{display:flex;gap:8px;align-items:center;width:100%}
+.edit-actions{display:flex;gap:8px;margin-left:auto}
+.save-icon{color:#7ee6d4}
+.cancel-icon{color:#ff9b9b}
 
-.edit-container input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  outline: none;
-  font-family: open-sans, sans-serif;
-  color: #333;
-  width: 100%;
-}
+/* skeleton loader */
+.skeleton{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));border-radius:8px;height:48px}
+.skeleton::after{content:'';position:absolute;top:0;left:-150%;width:150%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);animation:shimmer 1.2s linear infinite}
+@keyframes shimmer{to{transform:translateX(150%)}}
+.skeleton-title{height:26px;width:40%;margin:0 auto 18px;border-radius:8px}
+.skeleton-form{height:44px;margin-bottom:12px;border-radius:10px}
+.skeleton-item{height:56px;margin-bottom:10px;border-radius:10px}
 
-.edit-actions {
-  display: flex;
-  gap: 10px;
-  margin-left: auto;
-}
+/* empty state illustration & actions */
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:28px 0;color:var(--muted);text-align:center}
+.empty-illustration{width:160px;height:auto;border-radius:10px;box-shadow:0 10px 30px rgba(2,6,23,0.45);background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:8px}
+.empty-text{font-weight:600;color:var(--muted);font-size:15px;margin-top:6px}
+.empty-actions{display:flex;gap:8px;margin-top:8px}
+.empty-actions .btn{min-width:120px}
 
-.save-icon {
-  color: green;
-  margin-left: 10px;
-  cursor: pointer;
-}
+/* utility classes used by JSX */
+.flex-1{flex:1}
+.mb-2{margin-bottom:8px}
 
-.cancel-icon {
-  color: red;
-  cursor: pointer;
-}
+/* responsive */
+@media (max-width:520px){.container{padding:18px;border-radius:12px}h1{font-size:20px}.todo-form{flex-direction:column;align-items:stretch;gap:10px}.add-button{width:100%}.todo-item{padding:10px;gap:10px}}
 
-.edit-icon {
-  color: rgb(76, 183, 216);
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.edit-icon:hover {
-  color: rgb(16, 143, 182);
-}
-
-/* Completed task style */
-.completed {
-  text-decoration: line-through;
-  color: #888;
-}
-
-/* Skeleton Loading Styles */
-.skeleton {
-  position: relative;
-  overflow: hidden;
-  background-color: #e0e0e0;
-  border-radius: 4px;
-}
-
-.skeleton::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.2) 20%,
-    rgba(255, 255, 255, 0.5) 60%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.skeleton-title {
-  width: 60%;
-  height: 24px;
-  margin: 0 auto 20px;
-}
-
-.skeleton-form {
-  height: 40px;
-  margin-bottom: 20px;
-}
-
-.skeleton-item {
-  height: 48px;
-  margin-bottom: 10px;
-}
+/* reduced motion */
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;transform:none!important}}
