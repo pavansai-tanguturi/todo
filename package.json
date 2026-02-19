@@ -1,0 +1,17 @@
+{
+  "name": "todo-fullstack",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start:api": "node api/index.js",
+    "start:frontend": "cd todo-crud && npm start",
+    "dev": "echo 'Run in separate terminals: npm run start:api && npm run start:frontend'"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

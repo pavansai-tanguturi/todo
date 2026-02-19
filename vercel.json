@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "cd todo-crud && npm install && npm run build",
+  "outputDirectory": "todo-crud/build",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" }
+  ],
+  "functions": {
+    "api/index.js": {
+      "runtime": "@vercel/node@3"
+    }
+  }
+}

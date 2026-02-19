@@ -17,7 +17,8 @@ function App() {
   const [theme, setTheme] = useState('default'); // 'default' | 'sunset'
   const [isAddingSample, setIsAddingSample] = useState(false);
   
-  const API_URL = 'http://localhost:3001/todos';
+  // Use relative path for Vercel (same-origin), localhost for local dev
+  const API_URL = process.env.NODE_ENV === 'production' ? '/api/todos' : 'http://localhost:3001/api/todos';
   const MIN_LOADING_DURATION = 1000; // 1 second minimum loading time
 
   useEffect(() => {
